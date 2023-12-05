@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 import axios from "axios";
 
 const urlTypes = "https://pokeapi.co/api/v2/type";
-const urlPokemons = "https://pokeapi.co/api/v2/pokemon?limit=20"
+const urlPokemons = "https://pokeapi.co/api/v2/pokemon?limit=152"
 
 //////
 
@@ -20,7 +20,7 @@ const urlPokemons = "https://pokeapi.co/api/v2/pokemon?limit=20"
             name: type.name
         }})
     })
-    console.log(types)
+    console.log(types.length)
 }
 
 
@@ -33,7 +33,7 @@ const urlPokemons = "https://pokeapi.co/api/v2/pokemon?limit=20"
 export async function consulta() {
     const respuesta = await prisma.pokemon.findMany();
 
-    console.log(respuesta)
+    console.log(respuesta.length)
 }
 
 export async function cargarImg(){
@@ -56,16 +56,20 @@ export async function cargarPkm(){
         apiPokemons?.map(async (pokemon : any) => {
             const info = await axios.get(pokemon.url);
             return {
-                id: info.data.id,
+                number: info.data.id,
                 name: info.data.name,
+                hp: info.data.stats[0].base_stat,
+                attack : info.data.stats[1].base_stat,
+                defence : info.data.stats[2].base_stat,
+                speed: info.data.stats[5].base_stat,
+                height : info.data.height,
+                weight : info.data.weight,
                 types: info.data.types.map((t: any) => {
                     return {name: t.type.name}
                 }),
                 image: info.data.sprites.other["official-artwork"]
-                    .front_default,
-
-                    height : info.data.height,
-                    Weight : info.data.weight
+                    .front_default
+                
             };
         })
     );
@@ -76,16 +80,22 @@ export async function cargarPkm(){
         // })
         await prisma.pokemon.create(
             {data : {
-            name: pokemon.name,
-            Weight: pokemon.Weight,
-            height: pokemon.height,
-            image: pokemon.image,
-            types: {
+            name : pokemon.name,
+            number : pokemon.number,
+            hp : pokemon.hp,
+            attack : pokemon.attack,
+            defence : pokemon.defence,
+            speed : pokemon.speed,    
+            weight : pokemon.weight,
+            height : pokemon.height,
+            image : pokemon.image,
+            types : {
                 connect: pokemon.types // sets userId of Profile record
               },
         }})
     })
     const finalResponse = await prisma.pokemon.findMany({include:{types: true}});
+    
     console.log(finalResponse)
 }
 
