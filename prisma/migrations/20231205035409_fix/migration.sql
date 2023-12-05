@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Type" ALTER COLUMN "id" DROP DEFAULT;
+DROP SEQUENCE "Type_id_seq";
