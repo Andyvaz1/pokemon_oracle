@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Type" ALTER COLUMN "image" DROP NOT NULL;

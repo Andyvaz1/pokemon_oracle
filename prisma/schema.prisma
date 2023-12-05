@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+
+}
+
+model Pokemon {
+  id    String    @id @default(uuid())
+  name String
+  height Int
+  Weight Int
+  image String
+  types Type[]
+  user User? @relation("CreatedPokemon", fields: [userId], references: [id])
+  userId String?
+  favoritedBy User[] @relation("FavoritePokemon")
+  createdAt DateTime @default(now())
+}
+
+model Type{
+    id    Int    @id @default(autoincrement())
+    name String @unique
+    image String?
+    pokemon Pokemon[]
+    createdAt DateTime @default(now())
+    
+
+}
+
+model User{
+  id    String    @id @default(uuid())
+  name String?
+  image String?
+  email String @unique
+  role Role @default(USER)
+  createdPokemon Pokemon[] @relation("CreatedPokemon")
+  favoritedPokemon Pokemon[] @relation("FavoritePokemon")
+  createdAt DateTime @default(now())
+
+}
+
+enum Role{
+  USER
+  ADMIN
+}
