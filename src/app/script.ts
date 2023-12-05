@@ -31,7 +31,7 @@ const urlPokemons = "https://pokeapi.co/api/v2/pokemon?limit=20"
 // })
 
 export async function consulta() {
-    const respuesta = await prisma.pokemon.deleteMany();
+    const respuesta = await prisma.pokemon.findMany();
 
     console.log(respuesta)
 }

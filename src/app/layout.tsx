@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
  
-cargarPkm().catch(e=>{
+consulta().catch(e=>{
   console.error(e.mesage)
 })  
 
