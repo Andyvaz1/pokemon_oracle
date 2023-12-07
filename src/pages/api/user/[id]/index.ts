@@ -9,9 +9,8 @@ export default async function pokemonIdHandler(
     const paramId = req.query.id
     const key = req.query.key
     const method = req.method
+    const userUpdateData = req.body
 
-    console.log(req.query)
-    console.log("id de params" + paramId)
     if (key !== process.env.KEY) {
         res.status(401).send("Not authorized.")
     } else {
@@ -38,15 +37,30 @@ export default async function pokemonIdHandler(
                     res.status(200).send(`User deleted succesfuly! 
     Id: ${deletedUser.id}
     Name: ${deletedUser.name}
-    E-mail: ${deletedUser.email}
-                                        `)
+    E-mail: ${deletedUser.email}`)
                 } catch (error) {
                     res.send(error)
                 }
+                break
+            case "PUT":
+                try {
+                    const updatedUser = await prisma.user.update({
+                        where: { id: paramId as string },
+                        data: userUpdateData,
+                    })
+                    res.status(200).send(`User deleted succesfuly! 
+    Id: ${updatedUser.id}
+    Name: ${updatedUser.name}
+    E-mail: ${updatedUser.email}
+    Role: ${updatedUser.role}`)
+                } catch (error) {
+                    res.send(error)
+                }
+                break
             default:
                 res.status(405).json({
                     errorMessage:
-                        "That request method is not allowed in this route. Allowed methods: GET, DELETE",
+                        "That request method is not allowed in this route. Allowed methods: GET, DELETE, PUT",
                 })
         }
     }
