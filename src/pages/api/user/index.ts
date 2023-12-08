@@ -1,23 +1,24 @@
-import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import prisma from "../../../../prisma/prismaClient";
 
 export default async function UserHandler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const prisma = new PrismaClient();
     const userData = req.body;
     const method = req.method;
     const { key } = req.query;
 
     ///Authorization condition ///////
     if (key !== process.env.KEY) {
-        res.status(401).send("Not authorized.");
+        res.status(401).json({ errorMessage: "Not Authorized" });
     } else
         switch (method) {
             case "GET":
                 try {
-                    const allUsers = await prisma.user.findMany();
+                    const allUsers = await prisma.user.findMany({
+                        include: { createdPokemon: true },
+                    });
                     res.send(allUsers);
                 } catch (error) {
                     res.send(error);
@@ -26,7 +27,7 @@ export default async function UserHandler(
 
             case "POST":
                 try {
-                    const createUser = await prisma.user.create({
+                    const newUser = await prisma.user.create({
                         data: {
                             name: userData.name,
                             image: userData.image,
@@ -34,11 +35,14 @@ export default async function UserHandler(
                         },
                     });
 
-                    res.send(`User registered succesfuly! 
-    Id: ${createUser.id}
-    Name: ${createUser.name}
-    E-mail: ${createUser.email}
-                            `);
+                    res.json({
+                        message: "User created succesfuly!",
+                        userData: {
+                            id: newUser.id,
+                            name: newUser.name,
+                            email: newUser.email,
+                        },
+                    });
                 } catch (error) {
                     res.send(error);
                 }

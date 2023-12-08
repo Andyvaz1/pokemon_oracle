@@ -1,10 +1,8 @@
-import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import { typeImgList } from "@/utils/dictionaries";
-
-const prisma = new PrismaClient();
-const urlTypes = "https://pokeapi.co/api/v2/type";
+import prisma from "../../../../prisma/prismaClient";
+import { urlTypes } from "@/utils/variables";
 
 export default async function typeHandler(
     req: NextApiRequest,
