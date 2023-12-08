@@ -80,3 +80,15 @@ export const typeImgList = [
         image: "https://cdn.pixabay.com/photo/2018/05/18/15/43/pokemon-3411387_1280.png",
     },
 ];
+
+export const regions: Record<string, { offSet: number; limit: number }> = {
+    kanto: { offSet: 0, limit: 151 },
+    johto: { offSet: 151, limit: 100 },
+    hoenn: { offSet: 251, limit: 135 },
+    sinnoh: { offSet: 386, limit: 107 },
+    unova: { offSet: 493, limit: 156 },
+    kalos: { offSet: 649, limit: 72 },
+    alola: { offSet: 721, limit: 88 },
+    galar: { offSet: 809, limit: 89 },
+    all: { offSet: 0, limit: 898 },
+};
