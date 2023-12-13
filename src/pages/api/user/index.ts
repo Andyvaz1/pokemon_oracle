@@ -7,7 +7,7 @@ export default async function UserHandler(
 ) {
     const userData = req.body;
     const method = req.method;
-    const { key } = req.query;
+    const { key, email } = req.query;
 
     ///Authorization condition ///////
     if (key !== process.env.KEY) {
@@ -15,9 +15,30 @@ export default async function UserHandler(
     } else
         switch (method) {
             case "GET":
+                if (email) {
+                    try {
+                        const userDb = await prisma.user.findUnique({
+                            where: {
+                                email: email as string,
+                            },
+                            include: {
+                                createdPokemon: true,
+                                favoritedPokemon: true,
+                            },
+                        });
+                        res.status(200).json(
+                            userDb ?? { message: "User Not Found" }
+                        );
+                    } catch (error) {
+                        res.send(error);
+                    }
+                }
                 try {
                     const allUsers = await prisma.user.findMany({
-                        include: { createdPokemon: true },
+                        include: {
+                            createdPokemon: true,
+                            favoritedPokemon: true,
+                        },
                     });
                     res.send(allUsers);
                 } catch (error) {

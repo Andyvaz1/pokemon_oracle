@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Pokemon Oracle",
-    description: "Search and create your own Pokemon!",
+    description: "Search and create your own Pokemon with AI!",
 };
 
 // consulta().catch(e=>{
