@@ -1,3 +1,5 @@
+import { image } from "@nextui-org/react";
+
 export const typeImgList = [
     {
         name: "fighting",
@@ -79,6 +81,7 @@ export const typeImgList = [
         name: "shadow",
         image: "https://cdn.pixabay.com/photo/2018/05/18/15/43/pokemon-3411387_1280.png",
     },
+    { name: "all", image: "none" },
 ];
 
 export const regions: Record<string, { offSet: number; limit: number }> = {
