@@ -10,6 +10,7 @@ import {
     Link,
     Button,
 } from "@nextui-org/react";
+import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
 import React from "react";
 
@@ -33,7 +34,7 @@ const Navbar: React.FC = () => {
         <NextUiNavBar
             isBordered
             maxWidth="full"
-            className="bg-slate-900 border-purple-600"
+            className="bg-black border-purple-600"
         >
             <NavbarContent justify="center" className="sm:justify-start">
                 <NavbarMenuToggle
@@ -58,7 +59,7 @@ const Navbar: React.FC = () => {
                     justify="center"
                 >
                     <NavbarItem>
-                        <Link className="text-slate-200" href="#">
+                        <Link className="text-yellow-300" href="#">
                             About
                         </Link>
                     </NavbarItem>
@@ -72,12 +73,7 @@ const Navbar: React.FC = () => {
                         href="#"
                     >
                         Login
-                        <Image
-                            src="https://img.icons8.com/?size=256&id=17949&format=png"
-                            alt="google logo"
-                            width={25}
-                            height={25}
-                        />
+                        <FcGoogle size={25} />
                     </Button>
                 </NavbarItem>
             </NavbarContent>

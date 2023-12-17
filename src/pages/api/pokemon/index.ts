@@ -7,24 +7,24 @@ import prisma from "../../../../prisma/prismaClient";
 
 const pokemonHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     // Body and Params destructuring and variables declaration
-    const { key } = req.query;
-    const { type, region, userId, newPokemonData } = req.body;
+    const { key, type, region } = req.query;
+    const { userId, newPokemonData } = req.body;
 
     // Method validation
     switch (req.method) {
         case "GET":
             // Body validation
-            if (!req.body.region)
+            if (!req.query.region)
                 return res
                     .status(400)
                     .json({ errorMessage: "Region is required" });
-            if (!regions[req.body.region])
+            if (!regions[region as string])
                 return res.status(400).json({ errorMessage: "Region Invalid" });
-            if (!req.body.type)
+            if (!req.query.type)
                 return res
                     .status(400)
                     .json({ errorMessage: "Type is required" });
-            if (!typeImgList.find((t) => t.name === req.body.type))
+            if (!typeImgList.find((t) => t.name === req.query.type))
                 return res
                     .status(400)
                     .json({ errorMessage: "Type is Invalid" });
@@ -33,7 +33,7 @@ const pokemonHandler = async (req: NextApiRequest, res: NextApiResponse) => {
                 //     where: { userId: userId },
                 //     include: { types: true },
                 // });
-                const { offSet, limit } = regions[region];
+                const { offSet, limit } = regions[region as string];
                 const apiRequest = await axios(
                     `${urlPokemon}?limit=${limit}&offset=${offSet}`
                 );
@@ -58,7 +58,7 @@ const pokemonHandler = async (req: NextApiRequest, res: NextApiResponse) => {
                 // await apiRequest.data.results.map(
                 //     (pokemon: any) => {}
                 // );
-                const filteredPokemon = filterType(type, apiPokemon);
+                const filteredPokemon = filterType(type as string, apiPokemon);
 
                 res.status(200).json({
                     count: filteredPokemon.length,
