@@ -10,6 +10,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
     title: "Pokemon Oracle",
     description: "Search and create your own Pokemon with AI!",
+    category: "Pokemon AI",
+    icons: {
+        icon: "icon.png",
+    },
 };
 
 // consulta().catch(e=>{
@@ -23,7 +27,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className="dark">
                 <Providers>
                     <Navbar />
                     {children}
