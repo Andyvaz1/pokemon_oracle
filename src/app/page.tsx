@@ -19,13 +19,14 @@ export default function Home() {
                 `/api/pokemon?region=all&type=all`
             );
             setAllPokemons(
-                data.data.map((pokemon: any) => {
-                    let pokeList = {
-                        name: pokemon.name,
-                        image: pokemon.image,
-                    };
-                    return pokeList;
-                })
+                data.data
+                // .map((pokemon: any) => {
+                //     let pokeList = {
+                //         name: pokemon.name,
+                //         image: pokemon.image,
+                //     };
+                //     return pokeList;
+                // })
             );
         }
         fetchData();
