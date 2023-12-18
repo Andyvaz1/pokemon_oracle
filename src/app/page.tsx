@@ -15,9 +15,7 @@ export default function Home() {
 
     useEffect(() => {
         async function fetchData() {
-            const { data } = await axios.get(
-                `/api/pokemon?region=all&type=all`
-            );
+            const { data } = await axios.get(`/api/prueba`);
             setAllPokemons(
                 data.data
                 // .map((pokemon: any) => {
@@ -50,14 +48,14 @@ export default function Home() {
                     {allPokemons.map((pokemon: any) => (
                         <AutocompleteItem
                             className="text-white"
-                            startContent={
-                                <Avatar
-                                    alt={pokemon.name}
-                                    className="flex-shrink-0"
-                                    size="sm"
-                                    src={pokemon.image}
-                                />
-                            }
+                            // startContent={
+                            //     <Avatar
+                            //         alt={pokemon.name}
+                            //         className="flex-shrink-0"
+                            //         size="sm"
+                            //         src={pokemon.image}
+                            //     />
+                            // }
                             key={pokemon.name}
                             textValue={pokemon.name}
                         >
