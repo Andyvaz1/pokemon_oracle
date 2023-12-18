@@ -1,6 +1,6 @@
 "use client";
 import {
-    Navbar as NextUiNavBar,
+    Navbar,
     NavbarBrand,
     NavbarContent,
     NavbarItem,
@@ -14,7 +14,7 @@ import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
 import React from "react";
 
-const Navbar: React.FC = () => {
+const NavBar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
     const menuItems = [
@@ -31,11 +31,7 @@ const Navbar: React.FC = () => {
     ];
 
     return (
-        <NextUiNavBar
-            isBordered
-            maxWidth="full"
-            className="bg-black border-purple-600"
-        >
+        <Navbar maxWidth="full">
             <NavbarContent justify="center" className="sm:justify-start">
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -97,8 +93,8 @@ const Navbar: React.FC = () => {
                     </NavbarMenuItem>
                 ))}
             </NavbarMenu>
-        </NextUiNavBar>
+        </Navbar>
     );
 };
 
-export default Navbar;
+export default NavBar;
