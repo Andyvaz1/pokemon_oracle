@@ -6,10 +6,6 @@ import { filterType } from "@/utils/filters";
 import prisma from "../../../../prisma/prismaClient";
 
 const pruebaHandler = async (req: NextApiRequest, res: NextApiResponse) => {
-    // Body and Params destructuring and variables declaration
-    const { key, type, region } = req.query;
-    const { userId, newPokemonData } = req.body;
-
     // Method validation
     switch (req.method) {
         case "GET":
@@ -18,14 +14,13 @@ const pruebaHandler = async (req: NextApiRequest, res: NextApiResponse) => {
                 //     where: { userId: userId },
                 //     include: { types: true },
                 // });
-                const { offSet, limit } = regions[region as string];
+
                 const apiRequest = await axios(
                     `${urlPokemon}?limit=898&offset=0`
                 );
                 const apiPokemon = apiRequest.data.results.map(
                     (pokemon: any) => {
                         return {
-                            number: pokemon.id,
                             name: pokemon.name,
                         };
                     }

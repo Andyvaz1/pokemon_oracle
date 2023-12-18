@@ -42,7 +42,7 @@ export default function Home() {
                     className="max-w-xs  my-8 border-purple-600"
                     size="lg"
                     variant="bordered"
-                    isLoading={allPokemons.length ? false : true}
+                    isLoading={allPokemons?.length ? false : true}
                     aria-label="Search Pokémon"
                 >
                     {allPokemons.map((pokemon: any) => (
