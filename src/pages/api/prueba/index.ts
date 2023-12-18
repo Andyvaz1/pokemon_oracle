@@ -21,7 +21,9 @@ const pruebaHandler = async (req: NextApiRequest, res: NextApiResponse) => {
                 const apiPokemon = apiRequest.data.results.map(
                     (pokemon: any) => {
                         return {
-                            name: pokemon.name,
+                            name:
+                                pokemon.name.charAt(0).toUpperCase() +
+                                pokemon.name.slice(1),
                         };
                     }
                 );

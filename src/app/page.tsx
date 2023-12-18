@@ -36,10 +36,10 @@ export default function Home() {
                 <Autocomplete
                     defaultItems={allPokemons}
                     startContent={
-                        <IoIosSearch size={50} className="text-white" />
+                        <IoIosSearch size={50} className="text-gray-50" />
                     }
                     placeholder="Search Pokémon"
-                    className="max-w-xs  my-8 border-purple-600"
+                    className="max-w-xs  my-8"
                     size="lg"
                     variant="bordered"
                     isLoading={allPokemons?.length ? false : true}
