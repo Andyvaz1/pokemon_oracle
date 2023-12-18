@@ -39,7 +39,7 @@ export default function Home() {
                         <IoIosSearch size={50} className="text-gray-50" />
                     }
                     placeholder="Search Pokémon"
-                    className="max-w-xs  my-8"
+                    className="max-w-xs  my-8 text-white"
                     size="lg"
                     variant="bordered"
                     isLoading={allPokemons?.length ? false : true}
