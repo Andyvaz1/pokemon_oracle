@@ -42,7 +42,9 @@ const pokemonHandler = async (req: NextApiRequest, res: NextApiResponse) => {
                         const info = await axios.get(pokemon.url);
                         return {
                             number: info.data.id,
-                            name: info.data.name,
+                            name:
+                                pokemon.name.charAt(0).toUpperCase() +
+                                pokemon.name.slice(1),
                             hp: info.data.stats[0].base_stat,
                             attack: info.data.stats[1].base_stat,
                             defence: info.data.stats[2].base_stat,
