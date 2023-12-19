@@ -31,7 +31,7 @@ const NavBar: React.FC = () => {
     ];
 
     return (
-        <Navbar maxWidth="full">
+        <Navbar maxWidth="full" shouldHideOnScroll>
             <NavbarContent justify="center" className="sm:justify-start">
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -43,7 +43,8 @@ const NavBar: React.FC = () => {
                             src="/pokeOracleLogo2.png"
                             alt="Next.js Logo"
                             width={300}
-                            height={50}
+                            height={100}
+                            priority
                         />
                     </Link>
                 </NavbarBrand>
