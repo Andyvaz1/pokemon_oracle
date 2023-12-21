@@ -29,7 +29,7 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon }) => {
                     <h2 className="text-white text-3xl">{pokemon.name}</h2>
                 </Skeleton>
             </CardHeader>
-            <CardBody className=" min-h-[340px] lg:min-h-[240px]  md:min-h-auto overflow-visible p-2">
+            <CardBody className=" min-h-[340px]  lg:min-h-[240px]  md:min-h-[380px] overflow-visible p-2">
                 <Skeleton isLoaded={pokemon}>
                     <Image
                         src={pokemon.image}
