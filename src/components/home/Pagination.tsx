@@ -5,7 +5,7 @@ interface PaginationProps {
     setPage: (value: number) => void;
     pokemon: any;
 }
-const Pagination: React.FC<PaginationProps> = ({ setPage, pokemon }) => {
+const Pagination: React.FC<PaginationProps> = ({ page, setPage, pokemon }) => {
     function changePage(page: number) {
         setPage(page);
     }
@@ -13,10 +13,13 @@ const Pagination: React.FC<PaginationProps> = ({ setPage, pokemon }) => {
         <div className="flex justify-center mx-2 my-4">
             <PaginationNextUi
                 showControls
-                total={Math.round(pokemon.length / 12)}
-                initialPage={1}
                 color="secondary"
-                onChange={(page) => changePage(page)}
+                total={
+                    pokemon?.length !== 0 ? Math.ceil(pokemon?.length / 12) : 1 // Consulto length de pokemon por bug de initialPage
+                }
+                onChange={(p) => changePage(p)}
+                initialPage={1}
+                page={page}
             />
         </div>
     );

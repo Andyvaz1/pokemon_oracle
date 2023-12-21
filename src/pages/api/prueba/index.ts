@@ -24,6 +24,7 @@ const pruebaHandler = async (req: NextApiRequest, res: NextApiResponse) => {
                             name:
                                 pokemon.name.charAt(0).toUpperCase() +
                                 pokemon.name.slice(1),
+                            id: pokemon.id,
                         };
                     }
                 );
