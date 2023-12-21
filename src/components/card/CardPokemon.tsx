@@ -11,7 +11,7 @@ import {
 import { Pokemon } from "@prisma/client";
 
 interface CardPokemonProps {
-    // key: string | number;
+    // key: // string | number;
     pokemon: any;
 }
 
@@ -26,16 +26,18 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon }) => {
         >
             <CardHeader className=" flex justify-center">
                 <Skeleton isLoaded={pokemon}>
-                    <h2 className="text-white">{pokemon.name}</h2>
+                    <h2 className="text-white text-3xl">{pokemon.name}</h2>
                 </Skeleton>
             </CardHeader>
-            <CardBody className="overflow-visible p-2">
-                <Image
-                    src={pokemon.image}
-                    alt={pokemon.name}
-                    radius="lg"
-                    width="100%"
-                />
+            <CardBody className=" min-h-[340px] lg:min-h-[240px]  md:min-h-auto overflow-visible p-2">
+                <Skeleton isLoaded={pokemon}>
+                    <Image
+                        src={pokemon.image}
+                        alt={pokemon.name}
+                        radius="lg"
+                        width="100%"
+                    />
+                </Skeleton>
             </CardBody>
             <CardFooter className="flex justify-center">
                 {pokemon.types.map((type: { name: string }) => {
