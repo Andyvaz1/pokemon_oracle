@@ -20,6 +20,10 @@ export function SearchBar(props: any) {
         setSelectedPokemon(name);
     };
 
+    const onClear = () => {
+        console.log("clear");
+    };
+
     return (
         <div className="bg-black ">
             <div className="flex justify-center">
@@ -32,6 +36,7 @@ export function SearchBar(props: any) {
                     className="max-w-xs  my-8 text-white"
                     size="lg"
                     variant="bordered"
+                    color="secondary"
                     isLoading={allPokemons?.length ? false : true}
                     aria-label="Search Pokémon"
                     allowsCustomValue={true}
