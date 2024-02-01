@@ -9,3 +9,7 @@ export function filterType(t: string, allPokemons: any[]) {
     });
     return pokemonByType;
 }
+
+export function capitalizeFirstLetter(str: String) {
+    return str?.charAt(0).toUpperCase() + str.slice(1);
+}

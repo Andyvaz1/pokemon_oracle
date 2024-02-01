@@ -6,18 +6,21 @@ import {
     SelectItem,
     SelectedItemProps,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 
 const SelectType: React.FC<SelectTypeProps> = ({
     selectedType,
     setSelectedType,
+    setPage,
     disabled,
+    selectedRegion,
 }) => {
-    const handleSelectionChange = (e: any) => {
-        console.log(e.target.value);
-        setSelectedType(e.target.value);
-    };
+    const router = useRouter();
+    // const handleSelectionChange = (e: any) => {
+    //     setSelectedType(e.target.value);
+    //     setPage(1);
+    // };
 
-    console.log(selectedType);
     return (
         <div className=" flex-col  justify-center my-4 mx-4">
             <Select
@@ -25,7 +28,12 @@ const SelectType: React.FC<SelectTypeProps> = ({
                 items={typeList}
                 label="Type: "
                 labelPlacement="outside-left"
-                defaultSelectedKeys={[selectedType ?? "all"]}
+                selectedKeys={[selectedType]}
+                // defaultSelectedKeys={[
+                //     selectedType?.length > 0 && selectedType !== "all"
+                //         ? selectedType
+                //         : "all",
+                // ]}
                 renderValue={(items) => {
                     return items.map((item) => {
                         return !selectedType ? (
@@ -52,7 +60,13 @@ const SelectType: React.FC<SelectTypeProps> = ({
                     });
                 }}
                 className="min-w-[190px] flex justify-center items-center"
-                onChange={handleSelectionChange}
+                onChange={(e) => {
+                    router.push(
+                        `/?region=${selectedRegion}&type=${e.target.value}&page=1`
+                    ),
+                        { scroll: false };
+                    setSelectedType(e.target.value);
+                }}
                 scrollShadowProps={{ isEnabled: false }}
             >
                 {typeList.map((type) => (

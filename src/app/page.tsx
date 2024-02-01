@@ -4,26 +4,14 @@ import { use, useEffect, useState } from "react";
 import SearchBar from "@/components/home/SearchBar";
 import axios from "axios";
 import CardPokemon from "@/components/card/CardPokemon";
-import CardSkeleton from "@/components/card/CardSkeleton";
-import Pagination from "@/components/home/Pagination";
-import { useSearchParams } from "next/navigation";
-import SelectFilters from "@/components/home/SelectFilters";
-import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url";
 
-const sekeletons = [
-    <CardSkeleton key={1} />,
-    <CardSkeleton key={2} />,
-    <CardSkeleton key={3} />,
-    <CardSkeleton key={4} />,
-    <CardSkeleton key={5} />,
-    <CardSkeleton key={6} />,
-    <CardSkeleton key={7} />,
-    <CardSkeleton key={8} />,
-    <CardSkeleton key={9} />,
-    <CardSkeleton key={10} />,
-    <CardSkeleton key={11} />,
-    <CardSkeleton key={12} />,
-];
+import Pagination from "@/components/home/Pagination";
+import { usePathname, useSearchParams } from "next/navigation";
+import SelectFilters from "@/components/home/SelectFilters";
+
+import sekeletons from "@/components/skeletons";
+import path from "path";
+
 interface Pokesolo {
     name: String;
     image: String;
@@ -31,68 +19,58 @@ interface Pokesolo {
 }
 
 export default function Home() {
-    const [selectedPokemon, setSelectedPokemon] = useState("");
-    const [displayedPokemon, setDisplayedPokemon] = useState<Pokesolo[]>([]);
-    const [page, setPage] = useState(1);
-    const [selectedRegion, setSelectedRegion] = useState("kanto");
-    const [selectedType, setSelectedType] = useState("all");
-
+    // URL search params
     const params = useSearchParams();
     const searchParams = params?.get("search");
     const typeParams = params?.get("type");
     const regionParams = params?.get("region");
+    const pageParams = params?.get("page");
 
-    // async function fetchDataTwo() {
-    //     async function fetchData() {
-    //         const { data } = await axios.get(
-    //             `/api/pokemon?region=kanto&type=all`
-    //         );
-    //         setDisplayedPokemon(data.data);
+    // State declaration
+
+    const [displayedPokemon, setDisplayedPokemon] = useState<Pokesolo[]>([]);
+    const [selectedPokemon, setSelectedPokemon] = useState(searchParams ?? "");
+    const [selectedRegion, setSelectedRegion] = useState(
+        regionParams ?? "kanto"
+    );
+    const [selectedType, setSelectedType] = useState(typeParams ?? "all");
+    const [page, setPage] = useState(pageParams ? parseInt(pageParams) : 1);
+
+    // Hooks
+    useEffect(() => {
+        setSelectedPokemon(searchParams || "");
+        setSelectedRegion(regionParams || "kanto");
+        setSelectedType(typeParams || "all");
+        setPage(page || 1);
+    }, [searchParams, regionParams, typeParams, page]);
+
+    // useEffect(() => {
+    //     if (searchParams) {
+    //         setSelectedPokemon(searchParams as string);
+    //     } else {
+    //         setSelectedPokemon("");
     //     }
-    //     fetchData();
-    // }
-    useEffect(() => {
-        if (searchParams) {
-            setSelectedPokemon(searchParams as string);
-        }
-        if (regionParams && typeParams) {
-            setSelectedRegion(typeParams as string);
-            setSelectedType(regionParams as string);
-        }
-    }, [searchParams, typeParams, regionParams]);
-
-    useEffect(() => {
-        async function fetchData() {
-            const { data } = await axios.get(
-                `/api/pokemon?region=${selectedRegion}&type=${selectedType}`
-            );
-            setDisplayedPokemon(data.data);
-
-            setPage(1);
-        }
-        if (!searchParams && !typeParams && !regionParams) fetchData();
-    }, [selectedRegion, selectedType, searchParams, typeParams, regionParams]);
+    // }, [searchParams]);
 
     useEffect(() => {
         async function fetchDataOne() {
-            if (selectedPokemon === "") {
-                return console.log("no hay pokemon seleccionado");
-            } else if (
-                selectedPokemon === null &&
-                !searchParams &&
-                !typeParams &&
-                !regionParams
-            ) {
+            if (!searchParams || searchParams === "undefined") {
                 const { data } = await axios.get(
                     `/api/pokemon?region=${selectedRegion}&type=${selectedType}`
                 );
-                console.log("aca");
+
                 setDisplayedPokemon(data.data);
-            } else {
+                setPage(pageParams ? parseInt(pageParams) : 1);
+                console.log(
+                    `Busca todos los pokemon region : ${selectedRegion} type: ${selectedType}`
+                );
+            }
+            if (selectedPokemon.length > 0 && selectedPokemon != "undefined") {
                 const { data } = await axios.get(
                     `https://pokeapi.co/api/v2/pokemon/${selectedPokemon.toLowerCase()}`
                 );
                 setDisplayedPokemon([{ ...data, key: 1 }]);
+                console.log(`Busca 1 pokemon : ${selectedPokemon}`);
                 setPage(1);
             }
         }
@@ -104,29 +82,49 @@ export default function Home() {
         searchParams,
         typeParams,
         regionParams,
+        pageParams,
+        params,
+        page,
     ]);
-    console.log(displayedPokemon);
+
+    // Logs
+    console.log(
+        " Pokemon" + selectedPokemon,
+        " region:" + selectedRegion,
+        " type: " + selectedType,
+        "page:" + page
+    );
+
     return (
         <div className="bg-black min-h-screen md:mx-40">
             <SearchBar
+                selectedType={selectedType}
+                selectedRegion={selectedRegion}
                 selectedPokemon={selectedPokemon}
                 setSelectedPokemon={setSelectedPokemon}
+                pageParams={pageParams}
+                page={page}
             />
             <SelectFilters
                 selectedRegion={selectedRegion}
                 setSelectedRegion={setSelectedRegion}
                 selectedType={selectedType}
                 setSelectedType={setSelectedType}
+                setPage={setPage}
                 disabled={
-                    selectedPokemon == "" || selectedPokemon == null
-                        ? false
-                        : true
+                    selectedPokemon?.length > 0 && selectedPokemon != null
+                        ? true
+                        : false
                 }
             />
             <Pagination
                 page={page}
                 setPage={setPage}
                 pokemon={displayedPokemon}
+                selectedRegion={selectedRegion}
+                selectedType={selectedType}
+                setDisplayedPokemon={setDisplayedPokemon}
+                pageParams={pageParams}
             />
 
             <div className="grid grid-cols-1  md:grid-cols-2 gap-12  lg:grid-cols-4 gap-18 ">
@@ -135,7 +133,7 @@ export default function Home() {
                           ?.map((pokemon: any) => {
                               return (
                                   <CardPokemon
-                                      key={pokemon.name}
+                                      key={pokemon?.name ?? 1}
                                       pokemon={pokemon}
                                   />
                               );
@@ -147,6 +145,9 @@ export default function Home() {
                 page={page}
                 setPage={setPage}
                 pokemon={displayedPokemon}
+                selectedRegion={selectedRegion}
+                selectedType={selectedType}
+                setDisplayedPokemon={setDisplayedPokemon}
             />
         </div>
     );

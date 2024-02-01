@@ -8,20 +8,26 @@ export interface SelectFiltersProps {
     selectedType: string;
     setSelectedType: any;
     disabled: boolean;
+    setPage: (page: number) => void;
 }
 
 export interface SelectRegionProps {
     selectedRegion: string;
     setSelectedRegion: (region: string) => void;
     disabled: boolean;
+    setPage: (page: number) => void;
+    selectedType?: string;
+    page?: number;
 }
 
 export type DetailedPokemon = Pokemon & { types: Type[] };
 
 export interface SelectTypeProps {
     selectedType: string;
-    setSelectedType: (items: SelectedItems<string>) => ReactNode;
+    setSelectedType: (items: SelectedItems<string> | any) => ReactNode;
     disabled: boolean;
+    setPage: (page: number) => void;
+    selectedRegion?: string;
 }
 
 export type SelectedItemProps<T> = {
