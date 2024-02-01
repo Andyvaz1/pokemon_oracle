@@ -7,6 +7,7 @@ const SelectFilters: React.FC<SelectFiltersProps> = ({
     setSelectedRegion,
     selectedType,
     setSelectedType,
+    setPage,
     disabled,
 }) => {
     return (
@@ -14,12 +15,16 @@ const SelectFilters: React.FC<SelectFiltersProps> = ({
             <SelectRegion
                 selectedRegion={selectedRegion}
                 setSelectedRegion={setSelectedRegion}
+                selectedType={selectedType}
                 disabled={disabled}
+                setPage={setPage}
             />
             <SelectType
                 setSelectedType={setSelectedType}
                 selectedType={selectedType}
+                selectedRegion={selectedRegion}
                 disabled={disabled}
+                setPage={setPage}
             />
         </div>
     );

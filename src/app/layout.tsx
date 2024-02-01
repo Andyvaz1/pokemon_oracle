@@ -5,6 +5,7 @@ import { main, consulta, cargarImg, cargarPkm } from "./script";
 import Navbar from "@/components/NavBar";
 import { Providers } from "./providers";
 import NavBar from "@/components/NavBar";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +31,9 @@ export default function RootLayout({
         <html lang="en">
             <body className="dark bg-black  text-white min-h-screen font-sans antialiased">
                 <Providers>
-                    <NavBar />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <NavBar />
+                    </Suspense>
                     {children}
                 </Providers>
             </body>

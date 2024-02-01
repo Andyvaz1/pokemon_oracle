@@ -4,6 +4,7 @@ import { urlPokemon } from "@/utils/variables";
 import { regions, typeImgList } from "@/utils/dictionaries";
 import { filterType } from "@/utils/filters";
 import prisma from "../../../../prisma/prismaClient";
+import { image } from "@nextui-org/react";
 
 const pruebaHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     // Method validation
@@ -18,16 +19,30 @@ const pruebaHandler = async (req: NextApiRequest, res: NextApiResponse) => {
                 const apiRequest = await axios(
                     `${urlPokemon}?limit=898&offset=0`
                 );
+
                 const apiPokemon = apiRequest.data.results.map(
                     (pokemon: any) => {
                         return {
+                            number: pokemon.url.split("/")[6],
                             name:
                                 pokemon.name.charAt(0).toUpperCase() +
                                 pokemon.name.slice(1),
-                            id: pokemon.id,
                         };
                     }
                 );
+                // const apiPokemon = await Promise.all(
+                //     apiRequest.data.results.map(async (pokemon: any) => {
+                //         const info = await axios.get(pokemon.url);
+                //         return {
+                //             number: info.data.id,
+                //             name:
+                //                 pokemon.name.charAt(0).toUpperCase() +
+                //                 pokemon.name.slice(1),
+
+                //             image: info.data.sprites.front_default,
+                //         };
+                //     })
+                // );
 
                 res.status(200).json({
                     count: apiPokemon.length,

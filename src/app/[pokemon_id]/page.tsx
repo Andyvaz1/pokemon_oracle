@@ -1,20 +1,31 @@
 "use client";
 import { DetailedPokemon } from "@/types/types";
 import { typeImg } from "@/utils/dictionaries";
-import { Avatar, Image, Skeleton } from "@nextui-org/react";
+import { Avatar, Button, Image, Skeleton } from "@nextui-org/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { GiBroadsword } from "react-icons/gi";
 import { GrShield } from "react-icons/gr";
 import { GiHealthNormal } from "react-icons/gi";
 import { IoSpeedometerOutline } from "react-icons/io5";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function PokemonDetail({
     params,
 }: {
-    params: { pokemon_id: number };
+    params: {
+        pokemon_id: number;
+        type: string;
+        region: string;
+        search: string;
+    };
 }) {
+    const router = useRouter();
     const { pokemon_id } = params;
+    const urlParams = useSearchParams();
+    const searchParams = urlParams?.get("search");
+    const typeParams = urlParams?.get("type");
+    const regionParams = urlParams?.get("region");
     const [pokemon, setPokemon] = useState<DetailedPokemon | null>(null);
 
     useEffect(() => {
@@ -25,10 +36,29 @@ export default function PokemonDetail({
         fetchData();
         return () => setPokemon(null);
     }, [pokemon_id]);
-    console.log(pokemon);
+
+    const handleBack = () => {
+        router.push(`/`);
+    };
 
     return (
         <div className="grid place-content-center align-items-center  min-h-[90vh]">
+            <Button
+                className="position-absolute top-0 left-0 "
+                onClick={() => {
+                    router.push(
+                        `/?region=${regionParams}&type=${typeParams}` +
+                            `${searchParams ? `&search=${searchParams}` : " "}`
+                    );
+                }}
+            ></Button>
+            <Button
+                className="position-absolute top-0 left-0 "
+                onClick={() => {
+                    router.back();
+                }}
+            ></Button>
+
             <div className="grid place-content-center align-items-center  ">
                 <Skeleton
                     isLoaded={pokemon !== null}
