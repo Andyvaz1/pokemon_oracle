@@ -9,6 +9,7 @@ import { GrShield } from "react-icons/gr";
 import { GiHealthNormal } from "react-icons/gi";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { useRouter, useSearchParams } from "next/navigation";
+import { IoArrowBack } from "react-icons/io5";
 
 export default function PokemonDetail({
     params,
@@ -23,9 +24,8 @@ export default function PokemonDetail({
     const router = useRouter();
     const { pokemon_id } = params;
     const urlParams = useSearchParams();
-    const searchParams = urlParams?.get("search");
-    const typeParams = urlParams?.get("type");
-    const regionParams = urlParams?.get("region");
+    const navParams = urlParams?.get("nav");
+
     const [pokemon, setPokemon] = useState<DetailedPokemon | null>(null);
 
     useEffect(() => {
@@ -43,7 +43,7 @@ export default function PokemonDetail({
 
     return (
         <div className="grid place-content-center align-items-center  min-h-[90vh]">
-            <Button
+            {/* <Button
                 className="position-absolute top-0 left-0 "
                 onClick={() => {
                     router.push(
@@ -51,23 +51,35 @@ export default function PokemonDetail({
                             `${searchParams ? `&search=${searchParams}` : " "}`
                     );
                 }}
-            ></Button>
-            <Button
-                className="position-absolute top-0 left-0 "
-                onClick={() => {
-                    router.back();
-                }}
-            ></Button>
+            ></Button> */}
 
             <div className="grid place-content-center align-items-center  ">
-                <Skeleton
-                    isLoaded={pokemon !== null}
-                    className=" m-6 h-[60px] rounded-lg font-thin text-xl text-slate-500 "
-                >
-                    <h1 className="flex justify-center ">
-                        #{pokemon?.number} - {pokemon?.name}
-                    </h1>
-                </Skeleton>
+                <div className="grid grid-cols-3 ">
+                    <div className="flex justify-center ">
+                        <Button
+                            color="secondary"
+                            size="md"
+                            className="right-80 w-20 flex position-absolute top-6 left-0 m-6"
+                            onClick={() => {
+                                if (navParams) {
+                                    router.back();
+                                } else {
+                                    router.push(`/`);
+                                }
+                            }}
+                        >
+                            <IoArrowBack className="text-3xl" />
+                        </Button>
+                    </div>
+                    <Skeleton
+                        isLoaded={pokemon !== null}
+                        className=" m-6 h-[60px] rounded-lg font-thin text-xl text-slate-500 "
+                    >
+                        <h1 className="flex justify-start col-span-2 ">
+                            #{pokemon?.number} - {pokemon?.name}
+                        </h1>
+                    </Skeleton>
+                </div>
 
                 <div className="flex m-4 h-[60px]  justify-center ">
                     {pokemon !== null ? (

@@ -54,7 +54,11 @@ export default function Home() {
 
     useEffect(() => {
         async function fetchDataOne() {
-            if (!searchParams || searchParams === "undefined") {
+            if (
+                !searchParams ||
+                searchParams === "undefined" ||
+                selectedPokemon == "undefined"
+            ) {
                 const { data } = await axios.get(
                     `/api/pokemon?region=${selectedRegion}&type=${selectedType}`
                 );
@@ -65,7 +69,11 @@ export default function Home() {
                     `Busca todos los pokemon region : ${selectedRegion} type: ${selectedType}`
                 );
             }
-            if (selectedPokemon.length > 0 && selectedPokemon != "undefined") {
+            if (
+                selectedPokemon.length > 0 &&
+                selectedPokemon !== "undefined" &&
+                searchParams
+            ) {
                 const { data } = await axios.get(
                     `https://pokeapi.co/api/v2/pokemon/${selectedPokemon.toLowerCase()}`
                 );
@@ -80,11 +88,11 @@ export default function Home() {
         selectedRegion,
         selectedType,
         searchParams,
-        typeParams,
-        regionParams,
+        // typeParams,
+        // regionParams,
         pageParams,
-        params,
-        page,
+        // params,
+        // page,
     ]);
 
     // Logs
@@ -96,7 +104,7 @@ export default function Home() {
     );
 
     return (
-        <div className="bg-black min-h-screen md:mx-40">
+        <div className="bg-black min-h-scree mx-[10%] sm:mx-[5%] md:mx-[10%] lg:mx-[4%]">
             <SearchBar
                 selectedType={selectedType}
                 selectedRegion={selectedRegion}
@@ -127,7 +135,7 @@ export default function Home() {
                 pageParams={pageParams}
             />
 
-            <div className="grid grid-cols-1  md:grid-cols-2 gap-12  lg:grid-cols-4 gap-18 ">
+            <div className="grid  grid-cols-1  gap-12 sm:grid-cols-2   lg:grid-cols-4  ">
                 {displayedPokemon?.length !== 0
                     ? displayedPokemon
                           ?.map((pokemon: any) => {
@@ -135,6 +143,7 @@ export default function Home() {
                                   <CardPokemon
                                       key={pokemon?.name ?? 1}
                                       pokemon={pokemon}
+                                      params={params ? true : false}
                                   />
                               );
                           })

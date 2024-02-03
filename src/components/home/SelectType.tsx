@@ -22,7 +22,7 @@ const SelectType: React.FC<SelectTypeProps> = ({
     // };
 
     return (
-        <div className=" flex-col  justify-center my-4 mx-4">
+        <div className=" flex-col  justify-center my-4 mx-2 sm:mx-4">
             <Select
                 isDisabled={disabled}
                 items={typeList}

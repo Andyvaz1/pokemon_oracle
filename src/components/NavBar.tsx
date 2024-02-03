@@ -31,7 +31,7 @@ const NavBar: React.FC = () => {
     ];
 
     return (
-        <Navbar maxWidth="full" shouldHideOnScroll>
+        <Navbar maxWidth="full">
             <NavbarContent justify="center" className="sm:justify-start">
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}

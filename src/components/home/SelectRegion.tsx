@@ -1,9 +1,7 @@
-"use client";
 import { SelectRegionProps } from "@/types/types";
 import { regionsList } from "@/utils/dictionaries";
 import { Select, SelectItem } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 const SelectRegion: React.FC<SelectRegionProps> = ({
     selectedRegion,
@@ -13,7 +11,6 @@ const SelectRegion: React.FC<SelectRegionProps> = ({
     setPage,
     disabled,
 }) => {
-    const [value, setValue] = useState("kanto");
     const router = useRouter();
 
     // const handleSelectionChange = (e: any) => {
@@ -22,7 +19,7 @@ const SelectRegion: React.FC<SelectRegionProps> = ({
     // };
 
     return (
-        <div className=" flex-col justify-center my-4  mx-4">
+        <div className=" flex-col justify-center my-4  sm:mx-6">
             <Select
                 isDisabled={disabled}
                 label="Region:"

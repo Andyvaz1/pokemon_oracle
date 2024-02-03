@@ -8,10 +8,10 @@ import {
 
 const CardSkeleton = () => {
     return (
-        <Card className="space-y-5 p-4" radius="lg">
+        <Card className=" mx-10 sm:mx-0 sm:min-w-[35%]" radius="lg">
             <CardHeader className="flex justify-center">
-                <Skeleton className="w-3/5 rounded-lg">
-                    <div className="h-2 w-3/5 rounded-lg bg-default-200"></div>
+                <Skeleton className="w-[60%]  rounded-lg">
+                    <div className="h-4 w-[25%] rounded-lg bg-default-200"></div>
                 </Skeleton>
             </CardHeader>
             <CardBody>

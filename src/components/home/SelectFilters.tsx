@@ -11,7 +11,7 @@ const SelectFilters: React.FC<SelectFiltersProps> = ({
     disabled,
 }) => {
     return (
-        <div className="flex justify-center ">
+        <div className="flex justify-center space-x-4 sm:max-w-[100%]">
             <SelectRegion
                 selectedRegion={selectedRegion}
                 setSelectedRegion={setSelectedRegion}
