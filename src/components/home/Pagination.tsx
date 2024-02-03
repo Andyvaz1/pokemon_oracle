@@ -25,7 +25,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
     const router = useRouter();
     return (
-        <div className="flex justify-center mx-2 my-4">
+        <div className="flex justify-center sm:mx-2 my-4 ">
             <PaginationNextUi
                 showControls
                 color="secondary"
@@ -40,6 +40,11 @@ const Pagination: React.FC<PaginationProps> = ({
                 }}
                 initialPage={page}
                 page={page}
+                classNames={{
+                    wrapper: "",
+                    item: " min-w-[20px]",
+                    cursor: "max-w-[10%]",
+                }}
             />
         </div>
     );

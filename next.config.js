@@ -10,6 +10,10 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "archives.bulbagarden.net",
             },
+            {
+                protocol: "https",
+                hostname: "raw.githubusercontent.com",
+            },
         ],
     },
 };
