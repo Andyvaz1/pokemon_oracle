@@ -42,8 +42,8 @@ const Pagination: React.FC<PaginationProps> = ({
                 page={page}
                 classNames={{
                     wrapper: "",
-                    item: " min-w-[20px]",
-                    cursor: "max-w-[10%]",
+                    item: " min-w-[20px] sm:min-w-none",
+                    // cursor: "max-w-[10%] sm:max-w-none",
                 }}
             />
         </div>

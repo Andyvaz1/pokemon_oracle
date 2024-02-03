@@ -35,7 +35,7 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon, params }) => {
         //transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300
 
         <>
-            {!pokemon.image ? (
+            {!pokemon ? (
                 <CardSkeleton />
             ) : (
                 <Card
@@ -57,7 +57,7 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon, params }) => {
                 >
                     <CardHeader className=" flex justify-center min-h-[20%] min-w-[100%]">
                         <Skeleton isLoaded={pokemon}>
-                            <h2 className="text-slate-500 text-[20px] md:text-[30px]  ">
+                            <h2 className="text-slate-500 text-[30px] md:text-[30px]  ">
                                 {pokemon.number
                                     ? `#${pokemon.number} ` + pokemon.name
                                     : `#${pokemon.id} ` +
@@ -67,10 +67,6 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon, params }) => {
                         </Skeleton>
                     </CardHeader>{" "}
                     <CardBody className="flex justify-center   min-h-fit min-w-max lg:max-h-[280px] lg:min-h-[218] lg: md:max-h-[400px] md:min-h-[280px] overflow-visible p-2">
-                        <Skeleton
-                            isLoaded={pokemon}
-                            className="rounded-lg h-max  min-h-fit min-w-[200px] "
-                        />
                         <div className="flex justify-center max-w-[100%] ">
                             <Image
                                 src={
@@ -109,7 +105,7 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon, params }) => {
                                           src={typeImg[t.type.name]}
                                           isBordered
                                           color="default"
-                                          className="my-4"
+                                          className="my-4 mx-2"
                                           size="lg"
                                       />
                                   );
