@@ -135,7 +135,9 @@ export default function Home() {
                 pageParams={pageParams}
             />
 
-            <div className="grid  grid-cols-1  gap-12 sm:grid-cols-2   lg:grid-cols-4  ">
+            <div
+                className={`grid  grid-cols-1  gap-12 sm:grid-cols-2   lg:grid-cols-4  `}
+            >
                 {displayedPokemon?.length !== 0
                     ? displayedPokemon
                           ?.map((pokemon: any) => {
