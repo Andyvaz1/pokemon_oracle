@@ -136,7 +136,7 @@ export default function Home() {
             />
 
             <div
-                className={`grid  grid-cols-1  gap-12 sm:grid-cols-2   lg:grid-cols-4  `}
+                className={`grid  grid-cols-1  gap-12 sm:grid-cols-2  md:grid-cols-auto  lg:grid-cols-3 xl:grid-cols-4  xl:gap-8 justify-center xl:mx-0  mx-4`}
             >
                 {displayedPokemon?.length !== 0
                     ? displayedPokemon

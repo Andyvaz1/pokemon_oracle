@@ -39,7 +39,7 @@ export function SearchBar(props: any) {
 
     return (
         <div className="bg-black ">
-            <div className="flex justify-center">
+            <div className="flex justify-center ">
                 <Autocomplete
                     defaultInputValue={
                         selectedPokemon?.length > 0

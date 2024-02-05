@@ -1,3 +1,4 @@
+"use client";
 import { typeImg, typeImgList } from "@/utils/dictionaries";
 import {
     Avatar,
@@ -11,6 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 import CardSkeleton from "./CardSkeleton";
 import Image from "next/image";
+import { Suspense, useState } from "react";
 
 interface CardPokemonProps {
     // key: // string | number;
@@ -23,6 +25,7 @@ interface CardPokemonProps {
 
 const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon, params }) => {
     const router = useRouter();
+    const [loaded, setLoaded] = useState(false);
 
     return (
         // <Link
@@ -66,8 +69,16 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon, params }) => {
                             </h2>
                         </Skeleton>
                     </CardHeader>{" "}
-                    <CardBody className="flex justify-center   min-h-fit min-w-max lg:max-h-[280px] lg:min-h-[218] lg: md:max-h-[400px] md:min-h-[280px] overflow-visible p-2">
+                    <CardBody className="flex justify-center   min-h-fit min-w-max lg:max-h-[280px] lg:min-h-[218] lg: md:max-h-[400px]  md:min-h-[280px] overflow-visible p-2">
                         <div className="flex justify-center max-w-[100%] ">
+                            {/* <Suspense
+                                fallback={
+                                    <Skeleton className="w-[220px] h-[220px]" />
+                                }
+                            > */}
+                            {!loaded && (
+                                <Skeleton className=" rounded-lg  w-[260px] h-[260px]" />
+                            )}
                             <Image
                                 src={
                                     pokemon.image ??
@@ -76,10 +87,19 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon, params }) => {
                                 }
                                 alt={pokemon.name}
                                 sizes="100%"
-                                width={220}
-                                height={220}
+                                width={260}
+                                height={260}
+                                className={`${
+                                    (!loaded && "hidden") ||
+                                    "max-w-[180px] max-h-[180px] sm:max-w-[260px] sm:max-h-[260px] "
+                                }  `}
                                 loading="eager"
+                                onLoadingComplete={() => {
+                                    setLoaded(true);
+                                }}
                             />
+
+                            {/* </Suspense> */}
                         </div>
                     </CardBody>
                     <CardFooter className="flex justify-center ">
