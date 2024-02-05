@@ -19,13 +19,13 @@ const SelectRegion: React.FC<SelectRegionProps> = ({
     // };
 
     return (
-        <div className=" flex-col justify-center my-4  sm:mx-6">
+        <div className=" justify-center my-4  sm:mx-6">
             <Select
                 isDisabled={disabled}
                 label="Region:"
                 labelPlacement="outside-left"
                 selectedKeys={[selectedRegion]}
-                className="max-w-[180px] min-w-[160px] flex justify-center items-center"
+                className="sm:max-w-[180px] min-w-[160px] flex justify-center items-center"
                 onChange={(e) => {
                     router.push(
                         `/?region=${e.target.value}&type=${selectedType}&page=1`

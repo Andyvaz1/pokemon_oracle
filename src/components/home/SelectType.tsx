@@ -59,7 +59,7 @@ const SelectType: React.FC<SelectTypeProps> = ({
                         );
                     });
                 }}
-                className="min-w-[190px] flex justify-center items-center"
+                className="sm:max-w-[180px] min-w-[190px] flex justify-center items-center"
                 onChange={(e) => {
                     router.push(
                         `/?region=${selectedRegion}&type=${e.target.value}&page=1`
