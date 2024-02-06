@@ -27,11 +27,11 @@ const SelectRegion: React.FC<SelectRegionProps> = ({
                 selectedKeys={[selectedRegion]}
                 className="sm:max-w-[180px] min-w-[160px] flex justify-center items-center"
                 onChange={(e) => {
-                    setSelectedRegion(e.target.value);
                     router.push(
                         `/?region=${e.target.value}&type=${selectedType}&page=1`
                     ),
                         { scroll: false };
+                    //  setSelectedRegion(e.target.value);
                 }}
                 scrollShadowProps={{ isEnabled: false }}
             >
