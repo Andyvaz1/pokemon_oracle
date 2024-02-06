@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { main, consulta, cargarImg, cargarPkm } from "./script";
-import Navbar from "@/components/NavBar";
 import { Providers } from "./providers";
 import NavBar from "@/components/NavBar";
 import { Suspense } from "react";

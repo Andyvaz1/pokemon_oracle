@@ -60,7 +60,7 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon, params }) => {
                 >
                     <CardHeader className=" flex justify-center min-h-[20%] min-w-[100%]">
                         <Skeleton isLoaded={pokemon}>
-                            <h2 className="text-slate-500 text-[30px] md:text-[30px]  ">
+                            <h2 className="text-slate-500 min-[380px]:text-[25px] min-[380px]:p-0 md:text-[30px] p-2  ">
                                 {pokemon.number
                                     ? `#${pokemon.number} ` + pokemon.name
                                     : `#${pokemon.id} ` +
@@ -77,7 +77,7 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon, params }) => {
                                 }
                             > */}
                             {!loaded && (
-                                <Skeleton className=" rounded-lg  w-[260px] h-[260px]" />
+                                <Skeleton className="w-[180px] h-[180px] rounded-lg sm:w-[260px] sm:h-[260px] sm:max-w-[260px] sm:max-h-[260px]" />
                             )}
                             <Image
                                 src={
@@ -94,7 +94,7 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon, params }) => {
                                     "max-w-[180px] max-h-[180px] sm:max-w-[260px] sm:max-h-[260px] "
                                 }  `}
                                 loading="eager"
-                                onLoadingComplete={() => {
+                                onLoad={() => {
                                     setLoaded(true);
                                 }}
                             />

@@ -1,16 +1,15 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "@/components/home/SearchBar";
 import axios from "axios";
 import CardPokemon from "@/components/card/CardPokemon";
 
 import Pagination from "@/components/home/Pagination";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import SelectFilters from "@/components/home/SelectFilters";
 
 import sekeletons from "@/components/skeletons";
-import path from "path";
 
 interface Pokesolo {
     name: String;
@@ -35,7 +34,7 @@ export default function Home() {
     );
     const [selectedType, setSelectedType] = useState(typeParams ?? "all");
     const [page, setPage] = useState(pageParams ? parseInt(pageParams) : 1);
-
+    console.log(typeof pageParams, typeof page);
     // Hooks
     useEffect(() => {
         setSelectedPokemon(searchParams || "");
@@ -62,9 +61,9 @@ export default function Home() {
                 const { data } = await axios.get(
                     `/api/pokemon?region=${selectedRegion}&type=${selectedType}`
                 );
-
-                setDisplayedPokemon(data.data);
                 setPage(pageParams ? parseInt(pageParams) : 1);
+                setDisplayedPokemon(data.data);
+
                 console.log(
                     `Busca todos los pokemon region : ${selectedRegion} type: ${selectedType}`
                 );
