@@ -65,7 +65,7 @@ const SelectType: React.FC<SelectTypeProps> = ({
                         `/?region=${selectedRegion}&type=${e.target.value}&page=1`
                     ),
                         { scroll: false };
-                    setSelectedType(e.target.value);
+                    // setSelectedType(e.target.value);
                 }}
                 scrollShadowProps={{ isEnabled: false }}
             >

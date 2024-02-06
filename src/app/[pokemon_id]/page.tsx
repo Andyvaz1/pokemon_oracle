@@ -98,7 +98,7 @@ export default function PokemonDetail({
                     ) : (
                         <Skeleton
                             isLoaded={pokemon !== null}
-                            className="rounded-full w-20 h-20  "
+                            className="rounded-full w-22 h-22  "
                         />
                     )}
                 </div>
