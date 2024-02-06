@@ -34,14 +34,15 @@ export default function Home() {
     );
     const [selectedType, setSelectedType] = useState(typeParams ?? "all");
     const [page, setPage] = useState(pageParams ? parseInt(pageParams) : 1);
-    console.log(typeof pageParams, typeof page);
+
     // Hooks
     useEffect(() => {
-        setSelectedPokemon(searchParams || "");
-        setSelectedRegion(regionParams || "kanto");
-        setSelectedType(typeParams || "all");
-        setPage(page || 1);
-    }, [searchParams, regionParams, typeParams, page]);
+        console.log("useEffect setea los valores de la URL o default");
+        setSelectedPokemon(searchParams ?? "");
+        setSelectedRegion(regionParams ?? "kanto");
+        setSelectedType(typeParams ?? "all");
+        setPage(pageParams ? parseInt(pageParams) : 1);
+    }, [searchParams, regionParams, typeParams, pageParams, page]);
 
     // useEffect(() => {
     //     if (searchParams) {
@@ -61,7 +62,7 @@ export default function Home() {
                 const { data } = await axios.get(
                     `/api/pokemon?region=${selectedRegion}&type=${selectedType}`
                 );
-                setPage(pageParams ? parseInt(pageParams) : 1);
+
                 setDisplayedPokemon(data.data);
 
                 console.log(
@@ -89,17 +90,17 @@ export default function Home() {
         searchParams,
         // typeParams,
         // regionParams,
-        pageParams,
+        //  pageParams,
         // params,
-        // page,
+        //   page,
     ]);
 
     // Logs
     console.log(
-        " Pokemon" + selectedPokemon,
-        " region:" + selectedRegion,
+        " Pokemon: " + selectedPokemon,
+        " region: " + selectedRegion,
         " type: " + selectedType,
-        "page:" + page
+        "page: " + page
     );
 
     return (

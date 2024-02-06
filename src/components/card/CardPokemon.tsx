@@ -28,15 +28,6 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon, params }) => {
     const [loaded, setLoaded] = useState(false);
 
     return (
-        // <Link
-        //     href={
-        //         pokemon?.number
-        //             ? `/${pokemon.number}/?search=${selectedPokemon}&type=${selectedType}&region=${selectedRegion}`
-        //             : `/${pokemon.id}/?search=${selectedPokemon}&type=${selectedType}&region=${selectedRegion}`
-        //     }
-        // >
-        //transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300
-
         <>
             {!pokemon ? (
                 <CardSkeleton />
