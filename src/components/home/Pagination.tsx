@@ -13,11 +13,10 @@ interface PaginationProps {
 }
 const Pagination: React.FC<PaginationProps> = ({
     page,
-    setPage,
+
     pokemon,
     selectedRegion,
     selectedType,
-    pageParams,
 }) => {
     // function changePage(page: number) {
     //     setPage(page);
@@ -46,12 +45,25 @@ const Pagination: React.FC<PaginationProps> = ({
                     page={page}
                     classNames={{
                         wrapper: "",
-                        item: "max-[380px]:max-w-[20px] min-w-[20px] sm:min-w-none",
-                        cursor: "max-[380px]:max-w-[20px] sm:max-w-none",
+                        item: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
+                        cursor: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
+                        next: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
+                        prev: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
                     }}
                 />
             ) : (
-                <PaginationNextUi color="secondary" total={1} showControls />
+                <PaginationNextUi
+                    classNames={{
+                        wrapper: "",
+                        item: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
+                        cursor: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
+                        next: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
+                        prev: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
+                    }}
+                    color="secondary"
+                    total={1}
+                    showControls
+                />
             )}
         </div>
     );

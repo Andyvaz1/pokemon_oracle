@@ -23,9 +23,9 @@ const CardSkeleton = () => {
                     </div>
                 </Skeleton>
             </CardHeader>
-            <CardBody className="flex-row justify-center">
-                <Skeleton className=" rounded-lg flex justify-center  ">
-                    <div className=" max-[380px]:h-[180px] max-[380px]:w-[180px] rounded-lg h-[200px] w-[200px]  rounded-lg sm:w-[260px] sm:h-[260px]  "></div>
+            <CardBody className="flex-row justify-center min-h-[180px] min-w-[180px]">
+                <Skeleton className=" rounded-lg  ">
+                    <div className="rounded-lg flex justify-center  max-[380px]:h-[190px] max-[380px]:w-[180px]  h-[180px] w-[180px]   sm:w-[260px] sm:h-[290px]  "></div>
                 </Skeleton>
             </CardBody>
 
