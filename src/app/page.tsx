@@ -42,7 +42,7 @@ export default function Home() {
         setSelectedRegion(regionParams ?? "kanto");
         setSelectedType(typeParams ?? "all");
         setPage(pageParams ? parseInt(pageParams) : 1);
-    }, [searchParams, regionParams, typeParams, pageParams, page]);
+    }, [searchParams, regionParams, typeParams, pageParams]);
 
     // useEffect(() => {
     //     if (searchParams) {
@@ -83,6 +83,8 @@ export default function Home() {
             }
         }
         fetchDataOne();
+
+        return () => setDisplayedPokemon([]);
     }, [
         selectedPokemon,
         selectedRegion,

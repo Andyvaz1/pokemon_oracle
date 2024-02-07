@@ -80,6 +80,7 @@ const CardPokemon: React.FC<CardPokemonProps> = ({ pokemon, params }) => {
                                 sizes="100%"
                                 width={260}
                                 height={260}
+                                priority
                                 className={`${
                                     (!loaded && "hidden") ||
                                     "max-w-[180px] max-h-[180px] sm:max-w-[260px] sm:max-h-[260px] "
