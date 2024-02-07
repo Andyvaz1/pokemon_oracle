@@ -45,20 +45,20 @@ const Pagination: React.FC<PaginationProps> = ({
                     page={page}
                     classNames={{
                         wrapper: "",
-                        item: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
-                        cursor: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
-                        next: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
-                        prev: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
+                        item: "max-[380px]:max-w-[25px] max-[440px]:max-w-[28px] min-w-[25px] sm:min-w-none",
+                        cursor: "max-[380px]:max-w-[25px] max-[440px]:max-w-[28px] min-w-[25px] sm:min-w-none",
+                        next: "max-[380px]:max-w-[25px]  min-w-[25px] sm:min-w-none",
+                        prev: "max-[380px]:max-w-[25px]  min-w-[25px] sm:min-w-none",
                     }}
                 />
             ) : (
                 <PaginationNextUi
                     classNames={{
                         wrapper: "",
-                        item: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
-                        cursor: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
-                        next: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
-                        prev: "max-[380px]:max-w-[25px] min-w-[25px] sm:min-w-none",
+                        item: "max-[380px]:max-w-[25px] max-[440px]:max-w-[28px]  min-w-[25px] sm:min-w-none",
+                        cursor: "max-[380px]:max-w-[25px] max-[440px]:max-w-[28px] min-w-[25px] sm:min-w-none",
+                        next: "max-[380px]:max-w-[25px]  max-[440px]:max-w-[28px] min-w-[25px] sm:min-w-none",
+                        prev: "max-[380px]:max-w-[25px] max-[440px]:max-w-[28px] min-w-[25px] sm:min-w-none",
                     }}
                     color="secondary"
                     total={1}
