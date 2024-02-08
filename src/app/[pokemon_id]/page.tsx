@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-import DetailCard from "@/components/card/pokemonDetail";
+import DetailCard from "@/components/card/detailCard";
 
 export default function PokemonDetail({
     params,
