@@ -56,7 +56,10 @@ export default function DetailCard({
                 {pokemon !== null ? (
                     pokemon?.types.map((type: { name: string }) => {
                         return (
-                            <div className="flex flex-col items-center ">
+                            <div
+                                key={type.name}
+                                className="flex flex-col items-center "
+                            >
                                 <Avatar
                                     size="md"
                                     alt={type.name}
@@ -75,7 +78,10 @@ export default function DetailCard({
                 ) : (
                     <div className="flex flex-col items-center ">
                         <Skeleton className="rounded-full mx-4  text-large h-[42px] w-[42px] sm:mx-6 sm:h-[58px] sm:w-[58px]" />
-                        <Skeleton className="  my-2 rounded-md  max-[300px]:h-[10px] max-[390px]:h-[12px] h-[16px] w-[60px] xl:h-[24px]" />
+                        <Skeleton
+                            key="loaderType"
+                            className="  my-2 rounded-md  max-[300px]:h-[10px] max-[390px]:h-[12px] h-[16px] w-[60px] xl:h-[24px]"
+                        />
                     </div>
                 )}
             </div>
