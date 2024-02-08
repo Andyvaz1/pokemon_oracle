@@ -2,7 +2,6 @@ import { Pagination as PaginationNextUi } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 
 interface PaginationProps {
-    // key: string | number;
     page: number;
     setPage: (value: number) => void;
     pokemon: any;
@@ -18,10 +17,6 @@ const Pagination: React.FC<PaginationProps> = ({
     selectedRegion,
     selectedType,
 }) => {
-    // function changePage(page: number) {
-    //     setPage(page);
-    // }
-
     const router = useRouter();
     return (
         <div className="flex justify-center sm:mx-2 my-4 ">
@@ -35,7 +30,6 @@ const Pagination: React.FC<PaginationProps> = ({
                             : page // Consulto length de pokemon por bug de initialPage
                     }
                     onChange={(p) => {
-                        console.log(selectedRegion, selectedType, p);
                         router.push(
                             `/?region=${selectedRegion}&type=${selectedType}&page=${p}`,
                             { scroll: false }
