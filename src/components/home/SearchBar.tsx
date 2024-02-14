@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteItem, Avatar } from "@nextui-org/react";
+import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 import { Pokemon } from "@prisma/client";
 import { IoIosSearch } from "react-icons/io";
 import axios from "axios";
