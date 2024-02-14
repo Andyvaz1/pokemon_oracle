@@ -37,7 +37,6 @@ export default function Home() {
 
     // Hooks
     useEffect(() => {
-        console.log("useEffect setea los valores de la URL o default");
         setSelectedPokemon(searchParams ?? "");
         setSelectedRegion(regionParams ?? "kanto");
         setSelectedType(typeParams ?? "all");
@@ -64,10 +63,6 @@ export default function Home() {
                 );
 
                 setDisplayedPokemon(data.data);
-
-                console.log(
-                    `Busca todos los pokemon region : ${selectedRegion} type: ${selectedType}`
-                );
             }
             if (
                 selectedPokemon.length > 0 &&
@@ -78,7 +73,7 @@ export default function Home() {
                     `https://pokeapi.co/api/v2/pokemon/${selectedPokemon.toLowerCase()}`
                 );
                 setDisplayedPokemon([{ ...data, key: 1 }]);
-                console.log(`Busca 1 pokemon : ${selectedPokemon}`);
+
                 setPage(1);
             }
         }
@@ -98,15 +93,15 @@ export default function Home() {
     ]);
 
     // Logs
-    console.log(
-        " Pokemon: " + selectedPokemon,
-        " region: " + selectedRegion,
-        " type: " + selectedType,
-        "page: " + page
-    );
+    // console.log(
+    //     " Pokemon: " + selectedPokemon,
+    //     " region: " + selectedRegion,
+    //     " type: " + selectedType,
+    //     "page: " + page
+    // );
 
     return (
-        <div className="bg-black min-h-scree mx-[10%] sm:mx-[5%] md:mx-[10%] lg:mx-[4%]">
+        <div className="dark bg-black min-h-scree mx-[10%] sm:mx-[5%] md:mx-[10%] lg:mx-[4%]">
             <SearchBar
                 selectedType={selectedType}
                 selectedRegion={selectedRegion}
