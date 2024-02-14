@@ -13,9 +13,14 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
 import React from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { MdLogout } from "react-icons/md";
 
 const NavBar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const { data: session } = useSession();
+
+    console.log(session);
 
     const menuItems = [
         "Profile",
@@ -55,23 +60,44 @@ const NavBar: React.FC = () => {
                     className="hidden sm:flex gap-4"
                     justify="center"
                 >
+                    {session?.user ? (
+                        <NavbarItem>
+                            <span className="text-color-purple">
+                                {session?.user?.email}
+                            </span>
+                        </NavbarItem>
+                    ) : (
+                        <></>
+                    )}
                     <NavbarItem>
-                        <Link className="text-yellow-300" href="#">
+                        <Link color="secondary" href="/about">
                             About
                         </Link>
                     </NavbarItem>
                 </NavbarContent>
 
                 <NavbarItem>
-                    <Button
-                        as={Link}
-                        color="secondary"
-                        variant="solid"
-                        href="#"
-                    >
-                        Login
-                        <FcGoogle size={25} />
-                    </Button>
+                    {session?.user ? (
+                        <Button
+                            as={Link}
+                            color="secondary"
+                            variant="solid"
+                            onPress={() => signOut()}
+                        >
+                            Log Out
+                            <MdLogout size={25} />
+                        </Button>
+                    ) : (
+                        <Button
+                            as={Link}
+                            color="secondary"
+                            variant="solid"
+                            onPress={() => signIn()}
+                        >
+                            Login
+                            <FcGoogle size={25} />
+                        </Button>
+                    )}
                 </NavbarItem>
             </NavbarContent>
             <NavbarMenu>
