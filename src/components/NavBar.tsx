@@ -24,10 +24,13 @@ import Image from "next/image";
 import React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { MdLogout } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 const NavBar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const { data: session, status } = useSession();
+
+    const router = useRouter();
 
     console.log(session);
     const UnauthMenuItems = [
@@ -208,7 +211,10 @@ const NavBar: React.FC = () => {
             <NavbarMenu>
                 {session
                     ? authMenuItems.map((item, index) => (
-                          <NavbarMenuItem key={`${item.name}-${index}`}>
+                          <NavbarMenuItem
+                              key={`${item.name}-${index}`}
+                              onClick={() => setIsMenuOpen(false)}
+                          >
                               <Link
                                   color={
                                       index === 5
@@ -220,7 +226,10 @@ const NavBar: React.FC = () => {
                                   className="w-full"
                                   href={item.href}
                                   size="lg"
-                                  onTouchEnd={() => setIsMenuOpen(false)}
+                                  onPress={() => {
+                                      setIsMenuOpen(false);
+                                      router.push(item.href);
+                                  }}
                               >
                                   {item.name}
                               </Link>
@@ -229,6 +238,10 @@ const NavBar: React.FC = () => {
                     : UnauthMenuItems.map((item, index) => (
                           <NavbarMenuItem key={`${item.name}-${index}`}>
                               <Link
+                                  onPress={() => {
+                                      setIsMenuOpen(false);
+                                      router.push(item.href);
+                                  }}
                                   color={
                                       item.name === "Log In"
                                           ? "secondary"
@@ -237,7 +250,6 @@ const NavBar: React.FC = () => {
                                   className="w-full"
                                   href={item.href}
                                   size="lg"
-                                  onTouchEnd={() => setIsMenuOpen(false)}
                               >
                                   {item.name}
                               </Link>
