@@ -176,7 +176,9 @@ const NavBar: React.FC = () => {
                                             About Pokemon Oracle
                                         </DropdownItem>
                                         <DropdownItem
-                                            onPress={() => signOut()}
+                                            onPress={() => {
+                                                signOut();
+                                            }}
                                             key="logout"
                                             className="text-red-500"
                                         >
@@ -218,7 +220,7 @@ const NavBar: React.FC = () => {
                                   className="w-full"
                                   href={item.href}
                                   size="lg"
-                                  onPress={() => setIsMenuOpen(false)}
+                                  onTouchEnd={() => setIsMenuOpen(false)}
                               >
                                   {item.name}
                               </Link>
@@ -235,6 +237,7 @@ const NavBar: React.FC = () => {
                                   className="w-full"
                                   href={item.href}
                                   size="lg"
+                                  onTouchEnd={() => setIsMenuOpen(false)}
                               >
                                   {item.name}
                               </Link>
