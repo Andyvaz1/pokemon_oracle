@@ -9,6 +9,15 @@ import {
     NavbarMenuItem,
     Link,
     Button,
+    Avatar,
+    User,
+    Spinner,
+    DropdownMenu,
+    DropdownItem,
+    DropdownTrigger,
+    Dropdown,
+    user,
+    DropdownSection,
 } from "@nextui-org/react";
 import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
@@ -18,29 +27,30 @@ import { MdLogout } from "react-icons/md";
 
 const NavBar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
 
     console.log(session);
+    const UnauthMenuItems = [
+        { name: "Home", href: "/" },
+        { name: "About", href: "/about" },
+        { name: "Log In", href: "/api/auth/signin" },
+    ];
 
-    const menuItems = [
-        "Profile",
-        "Dashboard",
-        "Activity",
-        "Analytics",
-        "System",
-        "Deployments",
-        "My Settings",
-        "Team Settings",
-        "Help & Feedback",
-        "Log Out",
+    const authMenuItems = [
+        { name: "Home", href: "/" },
+        { name: "Profile", href: "/profile" },
+        { name: "Create Pokemon", href: "/create" },
+        { name: "About", href: "/about" },
+        { name: "Log Out", href: "/api/auth/signout" },
     ];
 
     return (
-        <Navbar maxWidth="full" shouldHideOnScroll>
+        <Navbar maxWidth="full" shouldHideOnScroll isMenuOpen={isMenuOpen}>
             <NavbarContent justify="center" className="sm:justify-start">
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     className="sm:hidden text-slate-200"
+                    onPress={() => setIsMenuOpen(!isMenuOpen)}
                 />
                 <NavbarBrand>
                     <Link href="/">
@@ -60,65 +70,176 @@ const NavBar: React.FC = () => {
                     className="hidden sm:flex gap-4"
                     justify="center"
                 >
-                    {session?.user ? (
-                        <NavbarItem>
-                            <span className="text-color-purple">
-                                {session?.user?.email}
-                            </span>
-                        </NavbarItem>
-                    ) : (
-                        <></>
-                    )}
                     <NavbarItem>
-                        <Link color="secondary" href="/about">
+                        <Link className="mx-2" color="secondary" href="/">
+                            Home
+                        </Link>
+                    </NavbarItem>
+                    <NavbarItem>
+                        <Link className="mx-2" color="secondary" href="/about">
                             About
                         </Link>
                     </NavbarItem>
                 </NavbarContent>
 
-                <NavbarItem>
-                    {session?.user ? (
-                        <Button
-                            as={Link}
-                            color="secondary"
-                            variant="solid"
-                            onPress={() => signOut()}
-                        >
-                            Log Out
-                            <MdLogout size={25} />
-                        </Button>
-                    ) : (
-                        <Button
-                            as={Link}
-                            color="secondary"
-                            variant="solid"
-                            onPress={() => signIn()}
-                        >
-                            Login
-                            <FcGoogle size={25} />
-                        </Button>
-                    )}
-                </NavbarItem>
+                {status === "loading" ? (
+                    <Spinner
+                        className="mx-6"
+                        key="authSpin"
+                        color="secondary"
+                        size="lg"
+                    />
+                ) : (
+                    <NavbarItem className="md:mx-6">
+                        {session?.user ? (
+                            <Dropdown radius="sm" backdrop="opaque">
+                                <DropdownTrigger>
+                                    <Avatar
+                                        isBordered
+                                        as="button"
+                                        className="transition-transform"
+                                        color="secondary"
+                                        name={session?.user?.name ?? "User"}
+                                        size="md"
+                                        src={session?.user?.image ?? ""}
+                                    />
+                                </DropdownTrigger>
+                                <DropdownMenu
+                                    aria-label="Custom item styles"
+                                    className="p-3"
+                                    color="secondary"
+                                    variant="bordered"
+                                    itemClasses={{
+                                        base: [
+                                            "rounded-md",
+                                            "text-default-500",
+                                            "transition-opacity",
+                                            "data-[hover=true]:text-foreground",
+                                            "data-[hover=true]:bg-default-100",
+                                            "dark:data-[hover=true]:bg-default-50",
+                                            "data-[selectable=true]:focus:bg-default-50",
+                                            "data-[pressed=true]:opacity-70",
+                                            "data-[focus-visible=true]:ring-default-500",
+                                        ],
+                                    }}
+                                >
+                                    <DropdownSection
+                                        aria-label="Profile & Actions"
+                                        showDivider
+                                    >
+                                        <DropdownItem
+                                            isDisabled
+                                            isReadOnly
+                                            key="profile"
+                                            className="h-14 gap-2 opacity-100 pointer-cursor"
+                                        >
+                                            <User
+                                                name={session.user.name}
+                                                description={session.user.email}
+                                                classNames={{
+                                                    name: "text-default-600",
+                                                    description:
+                                                        "text-default-500",
+                                                }}
+                                                avatarProps={{
+                                                    size: "sm",
+                                                    src:
+                                                        session.user.image ??
+                                                        "",
+                                                }}
+                                            />
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            as={Link}
+                                            href="/profile"
+                                            key="profile"
+                                        >
+                                            Profile
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            as={Link}
+                                            href="/create"
+                                            key="create"
+                                        >
+                                            Create Pokemon
+                                        </DropdownItem>
+                                    </DropdownSection>
+
+                                    <DropdownSection aria-label="Help & Feedback">
+                                        <DropdownItem key="help_and_feedback">
+                                            Help & Feedback
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            key="help_and_feedback"
+                                            href="/about"
+                                        >
+                                            About Pokemon Oracle
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            onPress={() => signOut()}
+                                            key="logout"
+                                            className="text-red-500"
+                                        >
+                                            Log Out
+                                        </DropdownItem>
+                                    </DropdownSection>
+                                </DropdownMenu>
+                            </Dropdown>
+                        ) : (
+                            <Button
+                                className=" text-purple-500 hover:text-white "
+                                color="secondary"
+                                variant="ghost"
+                                onPress={() =>
+                                    signIn(undefined, {
+                                        callbackUrl: window.location.href,
+                                    })
+                                }
+                                endContent={<FcGoogle size={20} />}
+                            >
+                                Log In
+                            </Button>
+                        )}
+                    </NavbarItem>
+                )}
             </NavbarContent>
             <NavbarMenu>
-                {menuItems.map((item, index) => (
-                    <NavbarMenuItem key={`${item}-${index}`}>
-                        <Link
-                            color={
-                                index === 2
-                                    ? "primary"
-                                    : index === menuItems.length - 1
-                                    ? "danger"
-                                    : "foreground"
-                            }
-                            className="w-full"
-                            href="#"
-                            size="lg"
-                        >
-                            {item}
-                        </Link>
-                    </NavbarMenuItem>
-                ))}
+                {session
+                    ? authMenuItems.map((item, index) => (
+                          <NavbarMenuItem key={`${item.name}-${index}`}>
+                              <Link
+                                  color={
+                                      index === 5
+                                          ? "primary"
+                                          : index === authMenuItems.length - 1
+                                          ? "danger"
+                                          : "foreground"
+                                  }
+                                  className="w-full"
+                                  href={item.href}
+                                  size="lg"
+                                  onPress={() => setIsMenuOpen(false)}
+                              >
+                                  {item.name}
+                              </Link>
+                          </NavbarMenuItem>
+                      ))
+                    : UnauthMenuItems.map((item, index) => (
+                          <NavbarMenuItem key={`${item.name}-${index}`}>
+                              <Link
+                                  color={
+                                      item.name === "Log In"
+                                          ? "secondary"
+                                          : "foreground"
+                                  }
+                                  className="w-full"
+                                  href={item.href}
+                                  size="lg"
+                              >
+                                  {item.name}
+                              </Link>
+                          </NavbarMenuItem>
+                      ))}
             </NavbarMenu>
         </Navbar>
     );
