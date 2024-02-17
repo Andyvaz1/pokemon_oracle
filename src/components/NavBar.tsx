@@ -227,8 +227,8 @@ const NavBar: React.FC = () => {
                                   href={item.href}
                                   size="lg"
                                   onPress={() => {
-                                      setIsMenuOpen(false);
                                       router.push(item.href);
+                                      setIsMenuOpen(false);
                                   }}
                               >
                                   {item.name}
@@ -239,8 +239,8 @@ const NavBar: React.FC = () => {
                           <NavbarMenuItem key={`${item.name}-${index}`}>
                               <Link
                                   onPress={() => {
-                                      setIsMenuOpen(false);
                                       router.push(item.href);
+                                      setIsMenuOpen(false);
                                   }}
                                   color={
                                       item.name === "Log In"
