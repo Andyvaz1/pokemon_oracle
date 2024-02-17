@@ -87,7 +87,7 @@ const NavBar: React.FC = () => {
 
                 {status === "loading" ? (
                     <Spinner
-                        className="mx-6"
+                        className="md:mx-6"
                         key="authSpin"
                         color="secondary"
                         size="lg"
