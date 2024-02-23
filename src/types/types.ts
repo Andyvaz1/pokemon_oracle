@@ -49,4 +49,12 @@ export type SelectedItemProps<T> = {
 
 type SelectedItems<T> = Array<SelectedItemProps<T>>;
 
+export interface Form {
+    [key: string]: any;
+    user: string | null | undefined;
+    name: string;
+    image: string;
+    stats: { attack: number; defense: number; speed: number; hp: number };
+}
+
 renderValue:;
