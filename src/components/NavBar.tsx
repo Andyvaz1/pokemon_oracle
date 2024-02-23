@@ -32,7 +32,6 @@ const NavBar: React.FC = () => {
 
     const router = useRouter();
 
-    console.log(session);
     const UnauthMenuItems = [
         { name: "Home", href: "/" },
         { name: "About", href: "/about" },
@@ -53,7 +52,7 @@ const NavBar: React.FC = () => {
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     className="sm:hidden text-slate-200"
-                    onPress={() => setIsMenuOpen(!isMenuOpen)}
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
                 />
                 <NavbarBrand>
                     <Link href="/">
@@ -63,6 +62,7 @@ const NavBar: React.FC = () => {
                             width={300}
                             height={100}
                             priority
+                            className="w-auto h-auto"
                         />
                     </Link>
                 </NavbarBrand>
@@ -100,7 +100,7 @@ const NavBar: React.FC = () => {
                                     <Avatar
                                         isBordered
                                         as="button"
-                                        className="transition-transform"
+                                        className="transition-transform hover:scale-110  hover:brightness-110"
                                         color="secondary"
                                         name={session?.user?.name ?? "User"}
                                         size="md"
@@ -133,8 +133,9 @@ const NavBar: React.FC = () => {
                                         <DropdownItem
                                             isDisabled
                                             isReadOnly
-                                            key="profile"
+                                            key="user"
                                             className="h-14 gap-2 opacity-100 pointer-cursor"
+                                            textValue="user"
                                         >
                                             <User
                                                 name={session.user.name}
@@ -173,8 +174,9 @@ const NavBar: React.FC = () => {
                                             Help & Feedback
                                         </DropdownItem>
                                         <DropdownItem
-                                            key="help_and_feedback"
+                                            key="about_pokemon_oracle"
                                             href="/about"
+                                            textValue="about"
                                         >
                                             About Pokemon Oracle
                                         </DropdownItem>

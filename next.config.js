@@ -15,6 +15,7 @@ const nextConfig = {
                 hostname: "raw.githubusercontent.com",
             },
             { protocol: "https", hostname: "lh3.googleusercontent.com" },
+            { protocol: "https", hostname: "techcrunch.com" },
         ],
     },
 };
