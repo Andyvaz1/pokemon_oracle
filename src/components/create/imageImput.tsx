@@ -54,7 +54,7 @@ const ImageInput: React.FC<ImageInputProps> = ({ formData, setFormData }) => {
                         width={475}
                         height={475}
                         alt="Selected Image"
-                        className=" w-full h-64"
+                        className="size-full p-8"
                     />
                 </div>
             ) : (
