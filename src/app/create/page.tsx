@@ -5,6 +5,8 @@ import React, { useState } from "react";
 import HorizontalStepper from "@/components/create/stepper";
 import ImageUploader from "@/components/create/imageUpload";
 import { Form } from "@/types/types";
+import PokemonStatsForm from "@/components/create/statsForm";
+import CardConfirm from "@/components/card/CardConfirm";
 
 const CreatePage: React.FC = () => {
     const { data: session, status } = useSession({
@@ -20,7 +22,11 @@ const CreatePage: React.FC = () => {
         user: session?.user?.email,
         name: "",
         image: "",
-        stats: { attack: 0, defense: 0, speed: 0, hp: 0 },
+        attack: 1,
+        defence: 1,
+        speed: 1,
+        hp: 1,
+        types: [],
     });
 
     const handleSubmit = async (formData: Form) => {
@@ -42,8 +48,16 @@ const CreatePage: React.FC = () => {
                 />
             ),
         },
-        { title: "Stats", content: <h2>Stats</h2> },
-        { title: "Confirm", content: <h2>Confirmation</h2> },
+        {
+            title: "Stats",
+            content: (
+                <PokemonStatsForm
+                    formData={formData}
+                    setFormData={setFormData}
+                />
+            ),
+        },
+        { title: "Confirm", content: <CardConfirm formData={formData} /> },
     ];
 
     if (status === "loading") {

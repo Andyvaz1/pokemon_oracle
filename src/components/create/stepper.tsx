@@ -107,7 +107,7 @@ const HorizontalStepper: React.FC<HorizontalStepperProps> = ({
                         </Button>
                         {steps.length - 1 === activeStep ? (
                             <Button
-                                className="px-8 py-2 mx-2  text-sm font-medium text-white bg-purple-500 rounded-md "
+                                className="px-8 py-2 mx-2 mb-2  text-sm font-medium text-white bg-purple-500 rounded-md "
                                 onClick={() => handleSubmit(formData)}
                                 color="secondary"
                                 size="md"
@@ -117,14 +117,22 @@ const HorizontalStepper: React.FC<HorizontalStepperProps> = ({
                             </Button>
                         ) : (
                             <Button
-                                className="px-8 py-2 mx-2  text-sm font-medium text-white bg-purple-500 rounded-md "
+                                className="px-8 py-2 mx-2 mb-2  text-sm font-medium text-white bg-purple-500 rounded-md "
                                 onClick={handleNext}
                                 color="secondary"
                                 size="md"
                                 isDisabled={
-                                    !formData[
-                                        steps[activeStep].title.toLowerCase()
-                                    ]
+                                    formData.name &&
+                                    formData.image &&
+                                    formData.types.length > 0 &&
+                                    formData.hp <= 300 &&
+                                    formData.hp >= 1 &&
+                                    formData.attack <= 300 &&
+                                    formData.attack >= 1 &&
+                                    formData.defence <= 300 &&
+                                    formData.defence >= 1 &&
+                                    formData.speed <= 300 &&
+                                    formData.speed >= 1
                                         ? false
                                         : true
                                 }
@@ -138,7 +146,7 @@ const HorizontalStepper: React.FC<HorizontalStepperProps> = ({
                 ) : (
                     <>
                         <Button
-                            className={`px-8 mx-2 py-2 text-sm font-medium  rounded-md `}
+                            className={`px-8 mx-2 py-2 mb-2  text-sm font-medium  rounded-md `}
                             color="secondary"
                             onClick={() => {
                                 setImgOption("none");
@@ -150,14 +158,14 @@ const HorizontalStepper: React.FC<HorizontalStepperProps> = ({
                             Back
                         </Button>
                         <Button
-                            className="px-8 py-2 mx-2  text-sm font-medium text-white bg-purple-500 rounded-md "
+                            className="px-8 py-2 mx-2 mb-2 text-sm font-medium text-white bg-purple-500 rounded-md "
                             onClick={handleNext}
                             color="secondary"
                             size="md"
                             isDisabled={
-                                !formData[steps[activeStep].title.toLowerCase()]
-                                    ? true
-                                    : false
+                                formData[steps[activeStep].title.toLowerCase()]
+                                    ? false
+                                    : true
                             }
                         >
                             Next
