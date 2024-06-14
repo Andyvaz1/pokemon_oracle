@@ -289,3 +289,25 @@ export const typeImg: TypeImg = {
     unknown:
         "https://w7.pngwing.com/pngs/115/437/png-transparent-pokemon-heartgold-and-soulsilver-unown-pokedex-missingno-unown-number-question-pokemon.png",
 };
+
+export const typeColors: Record<string, string> = {
+    fighting: `#ce4069`,
+    normal: `#9099a1`,
+    flying: `#92aade`,
+    poison: `#ab6ac8`,
+    ground: `#d97746`,
+    rock: `#c7b78b`,
+    bug: `#90c12c`,
+    ghost: `#5269ac`,
+    steel: `#5a8ea1`,
+    fire: `#ff9c54`,
+    water: `#4d90d5`,
+    grass: `#63bb5b`,
+    electric: `#f3d23b`,
+    psychic: `#f97176`,
+    ice: `#74cec0`,
+    dragon: `#096dc4`,
+    dark: `#5a5366`,
+    fairy: `#ec8fe6`,
+    transparent: "rgba(255,255,255,0)",
+};

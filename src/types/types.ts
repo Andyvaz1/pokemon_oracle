@@ -54,7 +54,18 @@ export interface Form {
     user: string | null | undefined;
     name: string;
     image: string;
-    stats: { attack: number; defense: number; speed: number; hp: number };
+    attack: number;
+    defence: number;
+    speed: number;
+    hp: number;
+    types: string[];
 }
 
-renderValue:;
+export interface PokemonStats {
+    name: string;
+    types: string[];
+    hp: number;
+    attack: number;
+    defence: number;
+    speed: number;
+}
