@@ -77,7 +77,7 @@ const PokemonStatsForm: React.FC<PokemonStatsProps> = ({
                         value={formData.name}
                         onChange={handleNameChange}
                         className="border text-slate-400 bg-slate-900 border-purple-500 rounded-md px-2 py-1 col-start-2 "
-                        maxLength={12}
+                        maxLength={14}
                     />
 
                     <span

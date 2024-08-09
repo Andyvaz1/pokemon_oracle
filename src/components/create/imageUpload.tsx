@@ -3,6 +3,7 @@ import React, { Dispatch, useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import ImageInput from "./imageImput";
 import { Form } from "@/types/types";
+import AiForm from "./aiForm";
 
 interface ImageUploaderProps {
     imgOption: string;
@@ -84,7 +85,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
             ) : imgOption === "upload" ? (
                 <ImageInput formData={formData} setFormData={setFormData} />
             ) : (
-                <h2>Ai form</h2>
+                <AiForm />
             )}
         </div>
     );
